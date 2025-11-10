@@ -1,6 +1,7 @@
 #include "headers.cpp"
 #include "globals.cpp"
-// ---------------- FILE helpers ----------------
+
+// FILE helpers
 vector<string> readLinesFile(const string &filename)
 {
     vector<string> lines;
@@ -39,7 +40,7 @@ void verifyLocalDoc(const string &user_doc)
         dst << line << "\n";
 }
 
-// ---------------- DIFF: produce Update objects ----------------
+// DIFF: produce Update objects
 vector<Update> diffLinesMakeUpdates(const vector<string> &old_lines, const vector<string> &new_lines, const string &uid)
 {
     vector<Update> updates;
@@ -125,7 +126,7 @@ vector<Update> diffLinesMakeUpdates(const vector<string> &old_lines, const vecto
     return updates;
 }
 
-// ---------------- SERIALIZATION (compact) ----------------
+// SERIALIZATION (compact)
 // Format:
 // toDo|line|startCol|endCol|timestamp|uid|old_len|old|new_len|new
 // using '|' as separators and lengths to allow any char in old/new.

@@ -14,7 +14,7 @@ const int MQ_MAXMSG_DEFAULT = 10;
 static bool g_show_merge_message = false;
 static vector<string> g_recent_notifications;
 
-// ---------------- SHARED REGISTRY ----------------
+// SHARED REGISTRY
 struct UserShMem
 {
     char uid[uid_LEN];
@@ -27,7 +27,7 @@ struct ShmRegistry
     int numUsers;
 };
 
-// ---------------- UPDATE (logical) ----------------
+// UPDATE (logical)
 struct Update
 {
     string toDo; // "insert", "delete", "replace"
@@ -40,7 +40,7 @@ struct Update
     string uid;
 };
 
-// ---------------- GLOBALS ----------------
+// GLOBALS
 ShmRegistry *gReg = nullptr;
 int gShmFd = -1;
 int gMySlot = -1;
@@ -54,7 +54,7 @@ static vector<string> gLastDispLines;
 // Track latest change summaries (local diffs or merged winners) to show
 static vector<Update> gPrevEdits;
 
-// ---------------- SPSC RING (lock-free) ----------------
+// SPSC RING (lock-free)
 struct ringRecv
 {
     vector<string> buffer; // store serialized messages (producer pushes strings)
@@ -83,7 +83,7 @@ struct ringRecv
 };
 ringRecv gRingRecv(RECV_RING_upBoundACITY);
 
-// ---------------- UTILS ----------------
+// UTILS
 string currStr()
 {
     time_t t = time(nullptr);
@@ -111,7 +111,7 @@ size_t maxSysMsgSize()
     return (size_t)v;
 }
 
-// ---------------- SHM (registry) ----------------
+// SHM (registry)
 ShmRegistry *openReg()
 {
     int fd = shm_open(SHM_NAME, O_RDWR | O_CREAT, 0666);
